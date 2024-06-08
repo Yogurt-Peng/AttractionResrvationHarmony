@@ -2,6 +2,7 @@
   "src": [
     "pages/Index",
     "pages/Login",
-    "pages/Register"
+    "pages/Register",
+    "pages/ForgotPassword"
   ]
 }

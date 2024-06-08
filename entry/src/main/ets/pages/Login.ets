@@ -33,7 +33,7 @@ struct Login {
 
         Button("登录")
           .width("100%")
-          .height(60)
+          .height(50)
           .margin({top:50,})
           .backgroundColor("#36cfc9")
           .fontSize(20)
