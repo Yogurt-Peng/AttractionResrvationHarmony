@@ -3,9 +3,9 @@
 export struct Home {
   build() {
 
-    Scroll(){
 
     Row() {
+      Scroll(){
       Column() {
 
         Stack({ alignContent: Alignment.TopStart }) {
@@ -25,6 +25,7 @@ export struct Home {
         Text("最受欢迎的景点").fontWeight(FontWeight.Bold).fontSize(15).margin(15)
 
 
+
         Row(){
           homeAttractionImage()
           homeAttractionImage()
@@ -39,14 +40,16 @@ export struct Home {
       .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
       .width("100%")
 
-    }
-    .width("100%")
-    .alignItems(VerticalAlign.Top) // 设置Column从顶部开始
-    .justifyContent(FlexAlign.Center)
 
     } .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
     .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
     .scrollBar(BarState.Off)               // 设置滚动条永久不显示
+
+    }
+    .width("100%")
+    .alignItems(VerticalAlign.Top) // 设置Column从顶部开始
+    .justifyContent(FlexAlign.Center)
+    .height("100%")
 
   }
 }

@@ -4,9 +4,11 @@ export struct  MyOperation {
 
   build() {
 
-    Scroll(){
 
       Column() {
+        Scroll(){
+
+
         Column({space:10}) {
           Text("我的景点").fontSize(20).fontColor("#36cfc9")
           MyAttraInfo()
@@ -22,14 +24,18 @@ export struct  MyOperation {
         .width("90%")
         .margin({top:10})
 
+        } .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
+        .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
+        .scrollBar(BarState.Off)               // 设置滚动条永久不显示
+
       }
       .width("100%")
+      .height("100%")
       .alignItems(HorizontalAlign.Center)// 设置Column从顶部开始
       .justifyContent(FlexAlign.Center)
 
-    } .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
-    .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
-    .scrollBar(BarState.Off)               // 设置滚动条永久不显示
+
+
 
   }
 
