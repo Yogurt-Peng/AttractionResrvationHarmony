@@ -14,6 +14,12 @@ export struct PersonalCenter {
           Image($rawfile("avatar.jpg"))
             .width(70)
             .height(70)
+            .shadow({
+              radius: 20,
+              color: Color.Grey,
+              offsetX: vp2px(2),
+              offsetY: vp2px(2)
+            })
 
         }
         .width("100%")

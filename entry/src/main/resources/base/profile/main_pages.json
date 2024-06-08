@@ -4,6 +4,7 @@
     "pages/Login",
     "pages/Register",
     "pages/ForgotPassword",
-    "pages/PersonalCenter"
+    "pages/PersonalCenter",
+    "pages/Home"
   ]
 }
