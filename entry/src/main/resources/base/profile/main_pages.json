@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/Login",
     "pages/Register",
-    "pages/ForgotPassword"
+    "pages/ForgotPassword",
+    "pages/PersonalCenter"
   ]
 }

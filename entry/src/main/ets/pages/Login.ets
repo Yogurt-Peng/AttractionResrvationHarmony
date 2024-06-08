@@ -1,6 +1,7 @@
+
 @Entry
 @Component
-struct Login {
+export  struct Login {
 
   build() {
     // 行
@@ -53,8 +54,10 @@ struct Login {
       .justifyContent(FlexAlign.Start)
       .width("85%")
       .height("95%")
+      .borderWidth(1)
 
     }
+    .borderWidth(1)
     .height("100%")
     .width("100%")
     .alignItems(VerticalAlign.Center)// 设置Column从顶部开始
