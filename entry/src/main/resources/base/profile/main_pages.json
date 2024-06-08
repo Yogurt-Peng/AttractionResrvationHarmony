@@ -5,6 +5,7 @@
     "pages/Register",
     "pages/ForgotPassword",
     "pages/PersonalCenter",
-    "pages/Home"
+    "pages/Home",
+    "pages/Operation"
   ]
 }

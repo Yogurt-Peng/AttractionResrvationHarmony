@@ -64,7 +64,6 @@ export  struct Login {
     .justifyContent(FlexAlign.Center)
 
 
-
   }
 
 

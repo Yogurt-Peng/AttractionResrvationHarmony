@@ -1,6 +1,6 @@
 @Entry
 @Component
-struct Home {
+export struct Home {
   build() {
     Row() {
       Column() {
@@ -31,12 +31,10 @@ struct Home {
         .margin({top:5})
 
 
-
       }
       .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
       .width("100%")
       .height("100%")
-      .borderWidth(1)
 
 
     }

@@ -1,4 +1,6 @@
-import {Login} from "../pages/Login"
+import { Login } from '../pages/Login'
+import { Home } from './Home'
+import { Operation } from './Operation'
 import { PersonalCenter } from './PersonalCenter'
 
 @Entry
@@ -11,13 +13,13 @@ struct Index {
         barPosition:BarPosition.End
       }){
         TabContent(){
-          Text("景点").fontSize(30)
+          Home()
 
         }.tabBar("景点")
         .borderColor("#36cfc9")
 
         TabContent(){
-          Text("活动").fontSize(30)
+          Operation()
         }.tabBar("活动")
 
         TabContent(){

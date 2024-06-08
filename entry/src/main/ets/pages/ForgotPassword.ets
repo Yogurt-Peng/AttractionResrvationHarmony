@@ -46,7 +46,7 @@ struct ForgotPassword {
       }
       .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
       .justifyContent(FlexAlign.Start)
-      .width("85%")
+      .width("95%")
       .height("95%")
     }
     .height("100%")

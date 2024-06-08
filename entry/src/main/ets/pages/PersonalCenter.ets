@@ -21,14 +21,18 @@ export struct PersonalCenter {
               offsetY: vp2px(2)
             })
 
+
         }
         .width("100%")
         .margin({top:30})
         .justifyContent(FlexAlign.SpaceBetween) //两边撑满
 
+
         Text("曾经沧海难为水，除却巫山不是云。")
           .opacity(0.3)
-        .fontSize(15)
+          .fontSize(15)
+
+
 
 
         pcCreateButton({label:"我的预约",icon:"shoucang.png",color:Color.Blue ,textColor:Color.White}).margin({top:100})
@@ -43,7 +47,7 @@ export struct PersonalCenter {
       }
       .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
       .justifyContent(FlexAlign.Start)
-      .width("85%")
+      .width("95%")
       .height("95%")
     }
     .height("100%")
