@@ -6,11 +6,8 @@ export struct Operation {
     Row() {
       Column() {
 
-
         operationCard()
-
         operationCard()
-
 
       }
       .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
