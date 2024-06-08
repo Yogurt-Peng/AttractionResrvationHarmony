@@ -14,17 +14,18 @@ struct Index {
       }){
         TabContent(){
           Home()
-
         }.tabBar("景点")
         .borderColor("#36cfc9")
 
         TabContent(){
           Operation()
         }.tabBar("活动")
+        .borderColor("#36cfc9")
 
         TabContent(){
           PersonalCenter()
         }.tabBar("我的")
+        .borderColor("#36cfc9")
 
       }
 
