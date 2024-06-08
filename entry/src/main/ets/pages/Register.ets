@@ -1,6 +1,6 @@
 @Entry
 @Component
-struct Login {
+struct Register {
 
   build() {
     // 行
@@ -11,37 +11,42 @@ struct Login {
           .width(20)
           .height(20)
 
-        Text("登录")
+        Text("注册")
           .fontSize(30)
           .fontWeight(FontWeight.Bold)
 
 
-        TextInput({placeholder:"用户名"})
+        TextInput({placeholder:"电话"})
           .height(50)
           .margin({top:50,})
-
+        TextInput({placeholder:"用户名"})
+          .height(50)
         TextInput({placeholder:"密码"})
           .height(50)
           .type(InputType.Password)
 
-        Row(){
-          Text("忘记密码?")
-            .opacity(0.2)
-
-        }.justifyContent(FlexAlign.End)
-        .width("100%")
-
-        Button("登录")
+        Button("同意协议并注册")
           .width("100%")
           .height(60)
           .margin({top:50,})
           .backgroundColor("#36cfc9")
           .fontSize(20)
 
+        Row() {
+          Checkbox({ name: 'checkbox3', group: 'checkboxGroup' })
+            .selectedColor('#36cfca')
+            .onChange((value: boolean) => {
+              console.info('Checkbox3 change is: ' + value)
+            })
+          Text('《注册协议》').fontSize(14).lineHeight(20).fontColor('#182431').fontWeight(500).opacity(0.2)
+        }.width("100%")
+        .justifyContent(FlexAlign.Center)//内容居中
+
+
 
         Row() {
-          Text("没有账号? ")
-          Text("注册")
+          Text("已经有账号? ")
+          Text("登录")
             .margin({left: 5})  // Add some space between the two texts
             .fontColor("#36cfc9")
         }.width("100%")
@@ -53,6 +58,7 @@ struct Login {
       .justifyContent(FlexAlign.Start)
       .width("85%")
       .height("95%")
+
 
     }
     .height("100%")
