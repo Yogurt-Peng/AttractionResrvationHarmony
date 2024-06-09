@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { sendPostRequest, Toast } from '../api/Util'
+import { sendRegisterRequest, Toast } from '../api/Util'
 import promptAction from '@ohos.promptAction';
 
 @Entry
@@ -32,7 +32,7 @@ struct Register {
 
         Button("同意协议并注册").width("100%").height(50) .margin({ top: 50, }) .backgroundColor("#36cfc9").fontSize(20).onClick(() => {
 
-            sendPostRequest('http://192.168.31.10:8080/Register',
+          sendRegisterRequest(
               {uname: this.uname,upassword: this.upassword,phone: this.phone },
               function (response) {
                 console.log("请求成功: " + JSON.stringify(response.data));

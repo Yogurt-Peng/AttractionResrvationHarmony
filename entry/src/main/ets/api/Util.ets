@@ -25,11 +25,32 @@ request.interceptors.response.use((response) => {
 })
 
 
-export function sendPostRequest(url, data, successCallback, errorCallback) {
+export function sendLoginRequest( data, successCallback, errorCallback) {
 
   axios({
     method: 'post',
-    url: url,
+    url: "http://192.168.31.10:8080/Login",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  }).then(function (response) {
+    if (successCallback) {
+      successCallback(response);
+    }
+  }).catch(function (error) {
+    if (errorCallback) {
+      errorCallback(error);
+    }
+  });
+}
+
+
+export function sendRegisterRequest( data, successCallback, errorCallback) {
+
+  axios({
+    method: 'post',
+    url: "http://192.168.31.10:8080/Register",
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -53,4 +74,30 @@ export function Toast(msg)
     duration: 2000, // 显示时长
     bottom: 300 // 距离底部的距离
   })
+}
+
+export function getAllAttraction(successCallback, errorCallback) {
+  axios({
+    method: 'get',
+    url: 'http://192.168.31.10:8080/allAttraction',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+  })
+    .then(response => {
+      if (successCallback) {
+        successCallback(response);
+      }
+    })
+    .catch(error => {
+      if (errorCallback) {
+        errorCallback(error);
+      }
+    });
+}
+
+
+export function print(msg)
+{
+  console.log("调试: "+msg);
 }

@@ -1,5 +1,5 @@
 import router from '@ohos.router'
-import { sendPostRequest, Toast } from '../api/Util'
+import { print, sendLoginRequest, Toast } from '../api/Util'
 
 @Entry
 @Component
@@ -32,14 +32,17 @@ export struct Login {
 
 
         Button("登录").width("100%").height(50).margin({ top: 50, }).backgroundColor("#36cfc9").fontSize(20).onClick(() => {
-          sendPostRequest('http://192.168.31.10:8080/Login',
-            {uname: this.uname,upassword: this.upassword},
+          this.uname="wait"
+          this.upassword="wait123"
+          sendLoginRequest({uname: this.uname,upassword: this.upassword},
             function (response) {
-              console.log("请求成功: " + JSON.stringify(response.data));
-              router.pushUrl({ url: "pages/Index" })
+              // console.log("请求失败: " +JSON.stringify(response.data));
+              print(JSON.stringify(response.data.data.uname))// 输出转换后的JavaScript对象
+              globalThis.loginParams={"uname":response.data.data.uname}
+              router.pushUrl({ url: "pages/Index"})
             },
             function (error) {
-              console.log("请求失败: " +JSON.stringify(error.response.data));
+              print(JSON.stringify(error.response.data));
               Toast(String(error.response.data.message))
             }
           );

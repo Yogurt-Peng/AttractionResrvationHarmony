@@ -1,21 +1,74 @@
+import { getAllAttraction, print, Toast } from '../api/Util';
+import { Attraction } from '../entity/Attraction'
+
 @Entry
 @Component
 export struct Home {
-  build() {
 
+
+  @State private attractions:Attraction[]= []
+  private textArray: string[] = ["1", "2", "3", "4", "5"]
+
+  aboutToAppear(){
+    print("进入Home")
+    getAllAttraction(
+      (response)=> {
+        const attractionsData = response.data.data
+        const attractions: Attraction[] = attractionsData.map((item: any) => {
+          return new Attraction(
+            item.aId,
+            item.name,
+            item.location,
+            item.description,
+            item.openingHours,
+            item.image,
+            item.price
+          );
+        });
+        this.attractions= attractions; // 将数据存储到@State变量中
+        this.attractions.forEach(attraction => print(attraction.name));
+
+      },
+      function(error) {
+        print(error.data)
+      }
+    );
+
+  }
+
+
+  build() {
 
     Row() {
       Scroll() {
         Column() {
 
           Stack({ alignContent: Alignment.TopStart }) {
+
             Swiper() {
-              homeSwiperImage({ label: "开普敦", img: "bg.jpg", desc: "神奇是它的代名词" })
-              homeSwiperImage({ label: "非洲", img: "bg1.jpg", desc: "神奇是它的代名词" })
+
+              // ForEach(this.textArray, (item: string, index?: number) => { // 循环数组创建每一个Item
+              //   Text(`Text: ${index}`)                                     // 可以生成一个或多个子组件
+              //     .fontSize(20)
+              //     .backgroundColor(Color.Pink)
+              //     .margin({ top: 10 })
+              // })
+
+
+              ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
+                if(index<2)
+                {
+                  homeSwiperImage({label:item.name,img:"bg1.jpg",desc:item.description})
+
+                }
+              })
+
 
             }.width("100%").height(300)
             .autoPlay(true)
             .indicatorStyle({ size: 20, color: "#36cfc9", selectedColor: Color.White, right: 0 })
+
+
 
             Row() {
               Search({ placeholder: '你想去哪？' })
@@ -29,15 +82,17 @@ export struct Home {
           Text("最受欢迎的景点").fontWeight(FontWeight.Bold).fontSize(15).margin(15)
 
 
-          Row() {
-            homeAttractionImage()
-            homeAttractionImage()
-          }
-          .padding({ left: 5, right: 5 })
-          .height(200)
-          .width("100%")
-          .justifyContent(FlexAlign.SpaceBetween) //两边撑满
-          .margin({ top: 5 })
+
+            Row() {
+
+            }
+            .padding({ left: 5, right: 5 })
+            .height(200)
+            .width("100%")
+            .justifyContent(FlexAlign.SpaceBetween) //两边撑满
+            .margin({ top: 5 })
+
+
 
         }
         .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
@@ -53,7 +108,10 @@ export struct Home {
     .justifyContent(FlexAlign.Center)
     .height("100%")
 
+
   }
+
+
 }
 
 

@@ -3,12 +3,15 @@ import router from '@ohos.router'
 @Entry
 @Component
 export struct PersonalCenter {
+
+  private uname:string=globalThis.loginParams.uname
+
   build() {
     Row() {
       Column() {
 
         Row() {
-          Text("Daniel Hua")
+          Text(this.uname)
             .fontSize(25)
             .fontWeight(FontWeight.Bold)
 
