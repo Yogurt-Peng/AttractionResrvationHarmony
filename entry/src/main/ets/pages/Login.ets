@@ -1,12 +1,12 @@
+import router from '@ohos.router'
 
 @Entry
 @Component
-export  struct Login {
-
+export struct Login {
   build() {
     // 行
     Row() {
-      Column({space:20}) {
+      Column({ space: 20 }) {
 
         Image($rawfile("back.png"))
           .width(20)
@@ -16,16 +16,15 @@ export  struct Login {
           .fontSize(30)
           .fontWeight(FontWeight.Bold)
 
-
-        TextInput({placeholder:"用户名"})
+        TextInput({ placeholder: "用户名" })
           .height(50)
-          .margin({top:50,})
+          .margin({ top: 50, })
 
-        TextInput({placeholder:"密码"})
+        TextInput({ placeholder: "密码" })
           .height(50)
           .type(InputType.Password)
 
-        Row(){
+        Row() {
           Text("忘记密码?")
             .opacity(0.2)
 
@@ -35,39 +34,39 @@ export  struct Login {
         Button("登录")
           .width("100%")
           .height(50)
-          .margin({top:50,})
+          .margin({ top: 50, })
           .backgroundColor("#36cfc9")
           .fontSize(20)
+          .onClick(() => {
+            router.pushUrl({ url: "pages/Index" })
+          })
 
 
         Row() {
           Text("没有账号? ")
           Text("注册")
-            .margin({left: 5})  // Add some space between the two texts
+            .margin({ left: 5 }) // Add some space between the two texts
             .fontColor("#36cfc9")
+            .onClick(() => {
+              router.pushUrl({ url: "pages/Register" })
+            })
+
         }.width("100%")
         .justifyContent(FlexAlign.Center)
-        .margin({top:150})
+        .margin({ top: 150 })
 
       }
-      .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
+      .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
       .justifyContent(FlexAlign.Start)
       .width("85%")
       .height("95%")
-      .borderWidth(1)
 
     }
-    .borderWidth(1)
     .height("100%")
     .width("100%")
-    .alignItems(VerticalAlign.Center)// 设置Column从顶部开始
+    .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
 
-
   }
-
-
-
-
 }
 

@@ -8,7 +8,21 @@ export struct MyOperation {
       Scroll() {
 
         Column({ space: 10 }) {
-          Text("我的活动").fontSize(20).fontColor("#36cfc9")
+
+          Row() {
+            Text("我的活动").fontSize(20).fontColor("#36cfc9")
+          }
+          .width("95%")
+          .justifyContent(FlexAlign.Center)
+          .borderRadius(10)
+          .shadow({
+            radius: 5,
+            color: "#36cfc9",
+            offsetX: vp2px(2),
+            offsetY: vp2px(2)
+          })
+
+
           MyOperInfo()
           MyOperInfo()
           MyOperInfo()
@@ -80,7 +94,7 @@ struct MyOperInfo {
       }
 
     }
-    .width("100%")
+    .width("95%")
     .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
     .padding(20)
     .borderRadius(10)

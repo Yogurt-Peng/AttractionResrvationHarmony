@@ -1,12 +1,13 @@
+import router from '@ohos.router'
+
 @Entry
 @Component
 export struct PersonalCenter {
-
   build() {
     Row() {
       Column() {
 
-        Row(){
+        Row() {
           Text("Daniel Hua")
             .fontSize(25)
             .fontWeight(FontWeight.Bold)
@@ -24,7 +25,7 @@ export struct PersonalCenter {
 
         }
         .width("100%")
-        .margin({top:30})
+        .margin({ top: 30 })
         .justifyContent(FlexAlign.SpaceBetween) //两边撑满
 
 
@@ -33,47 +34,52 @@ export struct PersonalCenter {
           .fontSize(15)
 
 
+        pcCreateButton({ label: "我的预约", icon: "shoucang.png", color: Color.Blue, textColor: Color.White })
+          .margin({ top: 100 })
+          .onClick(() => {
+            router.pushUrl({ url: "pages/MyAttraction" })
+          })
+        Divider()
+        pcCreateButton({ label: "我的活动", icon: "map.png", color: Color.Red, textColor: Color.White })
+          .onClick(() => {
+            router.pushUrl({ url: "pages/MyOperation" })
+          })
 
-
-        pcCreateButton({label:"我的预约",icon:"shoucang.png",color:Color.Blue ,textColor:Color.White}).margin({top:100})
+        
         Divider()
-        pcCreateButton({label:"我的活动",icon:"map.png",color:Color.Red ,textColor:Color.White});
+        pcCreateButton({ label: "设置", icon: "shezhi.png", color: Color.Green, textColor: Color.White })
         Divider()
-        pcCreateButton({label:"设置",icon:"shezhi.png",color:Color.Green ,textColor:Color.White});
-        Divider()
-        pcCreateButton({label:"退出登录",icon:"huiji.png",color:Color.Transparent ,textColor:Color.White});
+        pcCreateButton({ label: "退出登录", icon: "huiji.png", color: Color.Transparent, textColor: Color.White })
         Divider()
 
       }
-      .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
+      .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
       .justifyContent(FlexAlign.Start)
       .width("95%")
       .height("95%")
     }
     .height("100%")
     .width("100%")
-    .alignItems(VerticalAlign.Center)// 设置Column从顶部开始
+    .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
 
   }
-
-
 }
 
 @Component
 struct pcCreateButton {
-  private label:string;
-  private icon: string ;
+  private label: string;
+  private icon: string;
   private color: Color;
-  private textColor:Color;
+  private textColor: Color;
 
   build() {
-    Button({type: ButtonType.Normal}) {
+    Button({ type: ButtonType.Normal }) {
       Row() {
         Image($rawfile(this.icon))
           .width(30)
           .height(30)
-          .margin({left: 0,right:15})
+          .margin({ left: 0, right: 15 })
           .colorBlend(this.color)
 
         Text(this.label)
