@@ -45,11 +45,14 @@ export struct PersonalCenter {
             router.pushUrl({ url: "pages/MyOperation" })
           })
 
-        
+
         Divider()
         pcCreateButton({ label: "设置", icon: "shezhi.png", color: Color.Green, textColor: Color.White })
         Divider()
         pcCreateButton({ label: "退出登录", icon: "huiji.png", color: Color.Transparent, textColor: Color.White })
+          .onClick(() => {
+            router.pushUrl({ url: "pages/Login" })
+          })
         Divider()
 
       }
@@ -62,6 +65,7 @@ export struct PersonalCenter {
     .width("100%")
     .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
+
 
   }
 }

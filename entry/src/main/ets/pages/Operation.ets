@@ -2,9 +2,10 @@
 @Component
 export struct Operation {
   build() {
-    Scroll() {
 
-      Row() {
+    Row() {
+      Scroll() {
+
         Column({ space: 10 }) {
 
 
@@ -37,14 +38,15 @@ export struct Operation {
         .margin({ top: 10 })
 
       }
-      .width("100%")
-      .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
-      .justifyContent(FlexAlign.Center)
+      .scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
+      .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
+      .scrollBar(BarState.Off) // 设置滚动条永久不显示
 
-    }.scrollable(ScrollDirection.Vertical) // 滚动方向为垂直方向
-    .edgeEffect(EdgeEffect.Spring) // 滚动到边沿后回弹
-    .scrollBar(BarState.Off) // 设置滚动条永久不显示
-
+    }
+    .width("100%")
+    .height("100%")
+    .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
+    .justifyContent(FlexAlign.Center)
 
   }
 }
