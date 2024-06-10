@@ -49,18 +49,12 @@ export struct Home {
 
             ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
 
-              homeAttractionImage({ atra: item })
+              homeAttractionImage({ attr: item })
                 .onClick(() => {
                   router.pushUrl({
                     url: "pages/Reservation",
-                    params: {
-                      name: item.name,
-                      img: "bg.jpg",
-                      desc: item.description
-                    } })
+                    params: { attr: item } })
                 })
-
-              // homeAttractionImage({ label: item.name, img: "bg.jpg", date: item.openingHours })
 
             })
 
@@ -102,10 +96,8 @@ export struct Home {
         });
 
 
-        this.attractions.forEach(attraction => print(attraction.name));
-        if (this.attractions) {
-          print(this.attractions.length)
-        }
+        this.attractions.forEach(attraction => print(attraction.toString()));
+
       },
       (error) => {
         print(error.data)
@@ -136,14 +128,14 @@ struct homeSwiperImage {
 
 @Component
 struct homeAttractionImage {
-  private atra: Attraction;
+  private attr: Attraction;
 
   build() {
     Column() {
 
-      Image(toUrl(this.atra.image)).width("100%").height(150).borderRadius(10)
-      Text(this.atra.name).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
-      Text(this.atra.openingHours)
+      Image(toUrl(this.attr.image)).width("100%").height(150).borderRadius(10)
+      Text(this.attr.name).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
+      Text(this.attr.openingHours)
         .fontWeight(FontWeight.Bold)
         .fontSize(13)
         .fontColor(Color.Black)

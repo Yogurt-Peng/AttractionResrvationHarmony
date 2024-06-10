@@ -1,15 +1,13 @@
+export class Attraction {
+  public aid: number
+  public name: string
+  public location: string
+  public description: string
+  public openingHours: string
+  public image: string
+  public price: number
 
-
-export class Attraction{
-  public  aid:number
-  public name:string
-  public location:string
-  public description:string
-  public openingHours:string
-  public image:string
-  public price:number
-
-  constructor(aId: number, name: string, location: string, description: string, openingHours: string,  image: string, price: number) {
+  constructor(aId: number, name: string, location: string, description: string, openingHours: string, image: string, price: number) {
     this.aid = aId;
     this.name = name;
     this.location = location;
@@ -25,25 +23,18 @@ export class Attraction{
   }
 }
 
-export interface ApiResponse {
-  code: number;
-  message: string;
-  data: any[];
-}
+export class Operation {
+  public oid: number
+  public aid: number
+  public name: string
+  public description: string
+  public openingHours: string
+  public image: string
+  public price: number
 
-
-export class  Operation{
-  public oId:Number
-  public aId:Number
-  public name:string
-  public description:string
-  public openingHours:string
-  public image:string
-  public price:Number
-
-  constructor(oId:number,aId: number, name: string, description: string, openingHours: string,  image: string, price: number) {
-    this.oId = oId;
-    this.aId = aId;
+  constructor(oid: number, aid: number, name: string, description: string, openingHours: string, image: string, price: number) {
+    this.oid = oid;
+    this.aid = aid;
     this.name = name;
     this.description = description;
     this.openingHours = openingHours;
@@ -53,14 +44,13 @@ export class  Operation{
 
   public toString(): string {
     return `Operation Details:
-    oId: ${this.oId}
-    aId: ${this.aId}
+    oId: ${this.oid}
+    aId: ${this.aid}
     Name: ${this.name}
     Description: ${this.description}
     Opening Hours: ${this.openingHours}
     Image: ${this.image}
     Price: ${this.price}`;
   }
-
 }
 

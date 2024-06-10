@@ -1,11 +1,11 @@
-import { getAllOperation, print } from '../api/Util'
-import { Operation } from '../entity/Entity'
+import { getAllAttraction, getAllOperation, print, toUrl } from '../api/Util'
+import { Attraction, Operation } from '../entity/Entity'
 
 @Entry
 @Component
 export struct OperationPg {
-
-  @State private operations:Operation[]=[]
+  @State private operations: Operation[] = []
+  @State private attractions: Attraction[] = []
 
   build() {
 
@@ -20,24 +20,19 @@ export struct OperationPg {
           .width("100%")
           .justifyContent(FlexAlign.Center)
           .borderRadius(10)
-          .shadow({
-            radius: 5,
-            color: "#36cfc9",
-            offsetX: vp2px(2),
-            offsetY: vp2px(2)
-          })
+          .shadow({ radius: 5, color: "#36cfc9", offsetX: vp2px(2), offsetY: vp2px(2) })
 
+          if (this.operations.length !== 0 && this.attractions.length !== 0) {
+            ForEach(this.operations, (i: Operation, index?: number) => { // 循环数组创建每一个Item
 
-          if(this.operations.length!==0)
-          {
-            ForEach(this.operations, (item: Operation, index?: number) => { // 循环数组创建每一个Item
+              ForEach(this.attractions, (j: Attraction, index?: number) => { // 循环数组创建每一个Item
+                if (j.aid === i.aid) {
+                  operationCard({ oper: i, aname: j.name })
 
-              operationCard({img:"bg1.jpg",desc:item.description,time:item.openingHours,label:item.name})
+                }
+              })
             })
-
           }
-
-
         }
         .alignItems(HorizontalAlign.Center) // 设置内容从左部开始
         .justifyContent(FlexAlign.Start)
@@ -56,20 +51,20 @@ export struct OperationPg {
     .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
 
-
   }
-
 
   aboutToAppear() {
     print("进入Operation")
 
     getAllOperation(
-      (response)=> {
+      (response) => {
         const operationsData = response.data.data
 
-        this.operations = operationsData.map((item: any) => {
-          return new Operation(item.oId,item.aId,item.name,item.description,item.opeingHours,item.image,item.price)
+        this.operations = operationsData.map((item: Operation) => {
+          return new Operation(item.oid, item.aid, item.name, item.description, item.openingHours, item.image, item.price)
         })
+
+        this.operations.forEach(operation => print(operation.toString()));
 
       },
       (error) => {
@@ -77,26 +72,53 @@ export struct OperationPg {
       }
     );
 
-  }
+    getAllAttraction(
+      (response) => {
+        const attractionsData = response.data.data
+        this.attractions = attractionsData.map((item: Attraction) => {
+          return new Attraction(
+            item.aid,
+            item.name,
+            item.location,
+            item.description,
+            item.openingHours,
+            item.image,
+            item.price
+          );
+        });
 
+        this.attractions.forEach(attraction => print(attraction.toString()));
+
+
+      },
+      (error) => {
+        print(error.data)
+      }
+    )
+
+
+  }
 }
 
 @Component
 struct operationCard {
-  private img: string = "bg1.jpg";
-  private time: string = "2024.6.8-2024.6.10";
-  private label: string = "啤酒节";
-  private desc:string="描述"
+  private oper: Operation
+  private aname: string
 
   build() {
 
     Column() {
       Row() {
-        Image($rawfile(this.img)).width("100%").height(80).borderRadius(10).width(80)
+        Image(toUrl(this.oper.image)).width("100%").height(80).borderRadius(10).width(80)
         Column() {
 
-          Text(this.label).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
-          Text(this.desc)
+          Text(this.oper.name + "(" + this.aname + ")")
+            .fontWeight(FontWeight.Bold)
+            .fontSize(15)
+            .fontColor(Color.Black)
+            .margin({ left: 5, top: 5 })
+
+          Text(this.oper.description)
             .fontWeight(FontWeight.Bold)
             .fontSize(13)
             .fontColor(Color.Black)
@@ -105,7 +127,7 @@ struct operationCard {
             .width("70%")
 
 
-          Text(this.time)
+          Text(this.oper.openingHours)
             .fontWeight(FontWeight.Bold)
             .fontSize(13)
             .fontColor(Color.Black)
