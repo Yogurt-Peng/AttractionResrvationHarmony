@@ -1,4 +1,4 @@
-import { getAllAttraction, getAllAttraction1, print, sleep, Toast } from '../api/Util';
+import { getAllAttraction, getAllAttraction1, print, sleep, Toast, toUrl } from '../api/Util';
 import { Attraction } from '../entity/Entity'
 import router from '@ohos.router';
 
@@ -13,10 +13,8 @@ export struct Home {
   private textArray: string[] = ["1", "2", "3", "4", "5"]
 
   build() {
-
     Row() {
       Scroll() {
-
         Column() {
 
           Stack({ alignContent: Alignment.TopStart }) {
@@ -50,11 +48,19 @@ export struct Home {
           Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
 
             ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
-              homeAttractionImage({ label: item.name, img: "bg.jpg", date: item.openingHours })
+
+              homeAttractionImage({ atra: item })
                 .onClick(() => {
-                  router.pushUrl({ url: "pages/Reservation", params: {
-                    name: item.name, img: "bg.jpg", desc: item.description } })
+                  router.pushUrl({
+                    url: "pages/Reservation",
+                    params: {
+                      name: item.name,
+                      img: "bg.jpg",
+                      desc: item.description
+                    } })
                 })
+
+              // homeAttractionImage({ label: item.name, img: "bg.jpg", date: item.openingHours })
 
             })
 
@@ -130,16 +136,14 @@ struct homeSwiperImage {
 
 @Component
 struct homeAttractionImage {
-  private label: string;
-  private img: string;
-  private date: string;
+  private atra: Attraction;
 
   build() {
     Column() {
 
-      Image($rawfile(this.img)).width("100%").height(150).borderRadius(10)
-      Text(this.label).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
-      Text(this.date)
+      Image(toUrl(this.atra.image)).width("100%").height(150).borderRadius(10)
+      Text(this.atra.name).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
+      Text(this.atra.openingHours)
         .fontWeight(FontWeight.Bold)
         .fontSize(13)
         .fontColor(Color.Black)
@@ -161,6 +165,5 @@ struct homeAttractionImage {
 
   }
 }
-
 
 

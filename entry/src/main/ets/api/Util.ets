@@ -6,8 +6,12 @@ import { Attraction } from '../entity/Entity'
 export const request = axios.create({
   baseURL: "http://192.168.31.10:8080",
   timeout: 3000
-});
+})
 
+export function toUrl(imgName: string) {
+
+  return "http://192.168.31.10:8080" + imgName
+}
 //请求拦截
 request.interceptors.request.use((config) => {
   // 配置一些token
@@ -25,12 +29,12 @@ request.interceptors.response.use((response) => {
   print(response.data.data)
   return response;
 }, (err) => {
-  print("响应拦截错误：。。。。"+JSON.stringify(err))
+  print("响应拦截错误：。。。。" + JSON.stringify(err))
   return Promise.reject(err)
 })
 
 
-export function sendLoginRequest( data, successCallback, errorCallback) {
+export function sendLoginRequest(data, successCallback, errorCallback) {
 
   request({
     method: 'post',
@@ -51,7 +55,7 @@ export function sendLoginRequest( data, successCallback, errorCallback) {
 }
 
 
-export function sendRegisterRequest( data, successCallback, errorCallback) {
+export function sendRegisterRequest(data, successCallback, errorCallback) {
 
   request({
     method: 'post',
@@ -72,8 +76,7 @@ export function sendRegisterRequest( data, successCallback, errorCallback) {
 }
 
 
-export function Toast(msg)
-{
+export function Toast(msg) {
   promptAction.showToast({
     message: msg,
     duration: 2000, // 显示时长
@@ -81,8 +84,8 @@ export function Toast(msg)
   })
 }
 
-export  function getAllAttraction(successCallback, errorCallback) {
-   axios({
+export function getAllAttraction(successCallback, errorCallback) {
+  axios({
     method: 'get',
     url: 'http://192.168.31.10:8080/allAttraction',
     headers: {
@@ -101,12 +104,12 @@ export  function getAllAttraction(successCallback, errorCallback) {
     });
 }
 
-export  function getAllAttraction1() {
-   return  request.get("/allAttraction",{
-     headers: {
-       'Content-Type': 'application/x-www-form-urlencoded'
-     },
-   })
+export function getAllAttraction1() {
+  return request.get("/allAttraction", {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+  })
 }
 
 export function getAllOperation(successCallback, errorCallback) {
@@ -129,9 +132,8 @@ export function getAllOperation(successCallback, errorCallback) {
     });
 }
 
-export function print(msg)
-{
-  console.log("调试: "+msg);
+export function print(msg) {
+  console.log("调试: " + msg);
 }
 
 export function sleep(ms: number) {
