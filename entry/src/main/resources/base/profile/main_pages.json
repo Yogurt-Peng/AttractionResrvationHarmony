@@ -5,9 +5,10 @@
     "pages/Register",
     "pages/ForgotPassword",
     "pages/PersonalCenter",
-    "pages/Operation",
+    "pages/OperationPg",
     "pages/Reservation",
     "pages/MyAttraction",
-    "pages/MyOperation"
+    "pages/MyOperation",
+    "pages/Test"
   ]
 }

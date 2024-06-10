@@ -1,73 +1,38 @@
-import { getAllAttraction, print, Toast } from '../api/Util';
-import { Attraction } from '../entity/Attraction'
+import { getAllAttraction, getAllAttraction1, print, sleep, Toast } from '../api/Util';
+import { Attraction } from '../entity/Entity'
+import router from '@ohos.router';
+
 
 @Entry
 @Component
 export struct Home {
 
+  // new Attraction(1,"1","1","1","1","1",2)
+  @State attractions: Attraction[] = [] // 渲染
 
-  @State private attractions:Attraction[]= []
   private textArray: string[] = ["1", "2", "3", "4", "5"]
-
-  aboutToAppear(){
-    print("进入Home")
-    getAllAttraction(
-      (response)=> {
-        const attractionsData = response.data.data
-        const attractions: Attraction[] = attractionsData.map((item: any) => {
-          return new Attraction(
-            item.aId,
-            item.name,
-            item.location,
-            item.description,
-            item.openingHours,
-            item.image,
-            item.price
-          );
-        });
-        this.attractions= attractions; // 将数据存储到@State变量中
-        this.attractions.forEach(attraction => print(attraction.name));
-
-      },
-      function(error) {
-        print(error.data)
-      }
-    );
-
-  }
-
 
   build() {
 
     Row() {
       Scroll() {
+
         Column() {
 
           Stack({ alignContent: Alignment.TopStart }) {
+            if (this.attractions.length !== 0) {
+              Swiper() {
 
-            Swiper() {
+                ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
+                  if (index < 2) {
+                    homeSwiperImage({ label: item.name, img: "bg1.jpg", desc: item.description })
+                  }
+                })
 
-              // ForEach(this.textArray, (item: string, index?: number) => { // 循环数组创建每一个Item
-              //   Text(`Text: ${index}`)                                     // 可以生成一个或多个子组件
-              //     .fontSize(20)
-              //     .backgroundColor(Color.Pink)
-              //     .margin({ top: 10 })
-              // })
-
-
-              ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
-                if(index<2)
-                {
-                  homeSwiperImage({label:item.name,img:"bg1.jpg",desc:item.description})
-
-                }
-              })
-
-
-            }.width("100%").height(300)
-            .autoPlay(true)
-            .indicatorStyle({ size: 20, color: "#36cfc9", selectedColor: Color.White, right: 0 })
-
+              }.width("100%").height(300)
+              .autoPlay(true)
+              .indicatorStyle({ size: 20, color: "#36cfc9", selectedColor: Color.White, right: 0 })
+            }
 
 
             Row() {
@@ -77,22 +42,24 @@ export struct Home {
                 .width("70%")
                 .opacity(0.6)
             }.width("100%").justifyContent(FlexAlign.Center).margin({ top: 10 })
+
           }
 
           Text("最受欢迎的景点").fontWeight(FontWeight.Bold).fontSize(15).margin(15)
 
+          Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
 
+            ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
+              homeAttractionImage({ label: item.name, img: "bg.jpg", date: item.openingHours })
+                .onClick(() => {
+                  router.pushUrl({ url: "pages/Reservation", params: {
+                    name: item.name, img: "bg.jpg", desc: item.description } })
+                })
 
-            Row() {
+            })
 
-            }
-            .padding({ left: 5, right: 5 })
-            .height(200)
-            .width("100%")
-            .justifyContent(FlexAlign.SpaceBetween) //两边撑满
-            .margin({ top: 5 })
-
-
+          }
+          .width("100%")
 
         }
         .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
@@ -103,15 +70,42 @@ export struct Home {
       .scrollBar(BarState.Off) // 设置滚动条永久不显示
 
     }
+    .height("100%")
     .width("100%")
     .alignItems(VerticalAlign.Top) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
-    .height("100%")
-
 
   }
 
+  // 异步，同步，生命周期
+  aboutToAppear() {
+    print("进入Home");
+    getAllAttraction(
+      (response) => {
+        const attractionsData = response.data.data
+        this.attractions = attractionsData.map((item: Attraction) => {
+          return new Attraction(
+            item.aid,
+            item.name,
+            item.location,
+            item.description,
+            item.openingHours,
+            item.image,
+            item.price
+          );
+        });
 
+
+        this.attractions.forEach(attraction => print(attraction.name));
+        if (this.attractions) {
+          print(this.attractions.length)
+        }
+      },
+      (error) => {
+        print(error.data)
+      }
+    )
+  }
 }
 
 
@@ -143,9 +137,9 @@ struct homeAttractionImage {
   build() {
     Column() {
 
-      Image($rawfile("bg1.jpg")).width("100%").height(150).borderRadius(10)
-      Text("伦敦").fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
-      Text("2:00-24:00")
+      Image($rawfile(this.img)).width("100%").height(150).borderRadius(10)
+      Text(this.label).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
+      Text(this.date)
         .fontWeight(FontWeight.Bold)
         .fontSize(13)
         .fontColor(Color.Black)
@@ -153,7 +147,7 @@ struct homeAttractionImage {
         .opacity(0.4)
 
     }
-    .width("49%")
+    .width("46%")
     .height(200)
     .borderRadius(10)
     .alignItems(HorizontalAlign.Start) // 设置内容从左部开始
@@ -163,7 +157,7 @@ struct homeAttractionImage {
       offsetX: vp2px(2),
       offsetY: vp2px(2)
     })
-    .margin({ bottom: 10 })
+    .margin({ bottom: 10, left: 10 })
 
   }
 }

@@ -1,7 +1,7 @@
 import { print } from '../api/Util'
 import { Login } from '../pages/Login'
 import { Home } from './Home'
-import { Operation } from './Operation'
+import { OperationPg } from './OperationPg'
 import { PersonalCenter } from './PersonalCenter'
 import router from '@ohos.router'
 
@@ -21,13 +21,12 @@ struct Index {
           if (this.selectedIndex==0){
             Home()
           }
-
         }.tabBar("景点")
         .borderColor("#36cfc9")
 
         TabContent() {
           if (this.selectedIndex == 1) {
-            Operation()
+            OperationPg()
 
           }
         }.tabBar("活动")

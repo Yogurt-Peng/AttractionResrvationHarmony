@@ -1,25 +1,32 @@
+import router from '@ohos.router';
+
 @Entry
 @Component
 export struct Reservation {
 
+  // 从3.1.6.5版本起，取值方式为：router.getParams()['key']
+  private name: string = router.getParams()['name'];
+  private img: string = router.getParams()['img'];
+  private desc: string = router.getParams()['desc'];
+
   build() {
     Row(){
-      Column({space:15}) {
+      Column({space:10}) {
         Stack({ alignContent: Alignment.BottomStart }) {
-          Image($rawfile("bg.jpg")).borderRadius(10)
+          Image($rawfile(this.img)).borderRadius(10)
             .shadow({
               radius: 20,
               color: Color.Grey,
               offsetX: vp2px(2),
               offsetY: vp2px(2)
             })
-          Text("开普敦").fontSize(40).fontColor(Color.White).margin({ left: 10, bottom: 50 })
+          Text(this.name).fontSize(40).fontColor(Color.White).margin({ left: 10, bottom: 50 })
 
         }.height("200")
 
         Divider()
 
-        Text("开普敦（Cape Town），南非第二大城市，南非立法首都，西开普省省会，开普敦都会城区的组成部分，南非国会及很多政府部门亦坐落于该市。").opacity(0.5)
+        Text(this.desc).opacity(0.5)
 
         Text("请填写预约信息").fontColor(Color.Black).fontSize(20).opacity(0.7).fontWeight(FontWeight.Bold)
         TextInput({ placeholder: '请输入您的姓名' }).height(50).placeholderColor("#3592c4")
@@ -38,13 +45,13 @@ export struct Reservation {
       .alignItems(HorizontalAlign.Start)// 设置内容从左部开始
       .justifyContent(FlexAlign.Start)
       .width("95%")
-      .height("95%")
-      // .borderWidth(1)
+      .margin({ top: 10 })
+      .padding(10)
 
     }
     .height("100%")
     .width("100%")
-    .alignItems(VerticalAlign.Center)// 设置Column从顶部开始
+    .alignItems(VerticalAlign.Top)// 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
     .backgroundImageSize(ImageSize.Cover)
     .backgroundImage($rawfile("reservation_bg.jpg"))
