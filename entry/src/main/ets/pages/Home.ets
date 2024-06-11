@@ -23,7 +23,7 @@ export struct Home {
 
                 ForEach(this.attractions, (item: Attraction, index?: number) => { // 循环数组创建每一个Item
                   if (index < 2) {
-                    homeSwiperImage({ label: item.name, img: "bg1.jpg", desc: item.description })
+                    homeSwiperImage({ label: item.name, img: item.image, desc: item.description })
                   }
                 })
 
@@ -95,8 +95,7 @@ export struct Home {
           );
         });
 
-
-        this.attractions.forEach(attraction => print(attraction.toString()));
+        // this.attractions.forEach(attraction => print(attraction.toString()));
 
       },
       (error) => {
@@ -117,7 +116,7 @@ struct homeSwiperImage {
 
     Stack({ alignContent: Alignment.TopStart }) {
 
-      Image($rawfile(this.img)).width("100%")
+      Image(toUrl(this.img)).width("100%").objectFit(ImageFit.Cover).height(300)
       Text(this.label).fontWeight(FontWeight.Bold).fontSize(30).fontColor(Color.White).margin({ left: 10, top: 200 })
       Text(this.desc).margin({ left: 10, top: 240 }).fontColor(Color.White)
 
@@ -133,7 +132,7 @@ struct homeAttractionImage {
   build() {
     Column() {
 
-      Image(toUrl(this.attr.image)).width("100%").height(150).borderRadius(10)
+      Image(toUrl(this.attr.image)).width("100%").height(150).borderRadius(10).objectFit(ImageFit.Cover)
       Text(this.attr.name).fontWeight(FontWeight.Bold).fontSize(15).fontColor(Color.Black).margin({ left: 5, top: 5 })
       Text(this.attr.openingHours)
         .fontWeight(FontWeight.Bold)

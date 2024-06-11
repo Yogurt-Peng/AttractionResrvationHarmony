@@ -54,3 +54,49 @@ export class Operation {
   }
 }
 
+
+export class User {
+  public uid: number
+  public uname: string
+  public upassword: string
+  public avatar: string
+  public phone: string
+
+  constructor(uid: number, uname: string, upassword: string, avatar: string, phone: string,) {
+    this.uid = uid;
+    this.uname = uname;
+    this.upassword = upassword;
+    this.avatar = avatar;
+    this.phone = phone;
+  }
+}
+
+
+export class Reservation {
+  public aid: string;
+  public rid: string;
+  public uid: string;
+  public aname: string;
+  public reservationTime: string;
+  public card: string;
+
+  constructor(aid: string, rid: string, uid: string, aname: string, reservationTime: string, card: string) {
+    this.aid = aid;
+    this.rid = rid;
+    this.uid = uid;
+    this.aname = aname;
+    this.reservationTime = reservationTime;
+    this.card = card;
+  }
+
+  public toString(): string {
+    return `Reservation {
+      aid: ${this.aid},
+      rid: ${this.rid},
+      uid: ${this.uid},
+      aname: ${this.aname},
+      reservationTime: ${this.reservationTime},
+      card: ${this.card}
+    }`;
+  }
+}

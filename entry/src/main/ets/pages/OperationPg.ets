@@ -64,7 +64,7 @@ export struct OperationPg {
           return new Operation(item.oid, item.aid, item.name, item.description, item.openingHours, item.image, item.price)
         })
 
-        this.operations.forEach(operation => print(operation.toString()));
+        // this.operations.forEach(operation => print(operation.toString()));
 
       },
       (error) => {
@@ -87,7 +87,7 @@ export struct OperationPg {
           );
         });
 
-        this.attractions.forEach(attraction => print(attraction.toString()));
+        // this.attractions.forEach(attraction => print(attraction.toString()));
 
 
       },

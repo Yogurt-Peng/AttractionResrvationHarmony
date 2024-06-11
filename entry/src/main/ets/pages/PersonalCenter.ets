@@ -1,17 +1,16 @@
 import router from '@ohos.router'
+import { User } from '../entity/Entity'
 
 @Entry
 @Component
 export struct PersonalCenter {
-
-  private uname:string=globalThis.loginParams.uname
+  private user: User = globalThis.loginParams.user
 
   build() {
     Row() {
       Column() {
-
         Row() {
-          Text(this.uname)
+          Text(this.user.uname)
             .fontSize(25)
             .fontWeight(FontWeight.Bold)
 
@@ -43,13 +42,13 @@ export struct PersonalCenter {
             router.pushUrl({ url: "pages/MyAttraction" })
           })
         Divider()
-        pcCreateButton({ label: "我的活动", icon: "map.png", color: Color.Red, textColor: Color.White })
-          .onClick(() => {
-            router.pushUrl({ url: "pages/MyOperation" })
-          })
-
-
-        Divider()
+        // pcCreateButton({ label: "我的活动", icon: "map.png", color: Color.Red, textColor: Color.White })
+        //   .onClick(() => {
+        //     router.pushUrl({ url: "pages/MyOperation" })
+        //   })
+        //
+        //
+        // Divider()
         pcCreateButton({ label: "设置", icon: "shezhi.png", color: Color.Green, textColor: Color.White })
         Divider()
         pcCreateButton({ label: "退出登录", icon: "huiji.png", color: Color.Transparent, textColor: Color.White })
@@ -68,7 +67,6 @@ export struct PersonalCenter {
     .width("100%")
     .alignItems(VerticalAlign.Center) // 设置Column从顶部开始
     .justifyContent(FlexAlign.Center)
-
 
   }
 }

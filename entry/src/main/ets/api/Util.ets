@@ -4,13 +4,13 @@ import { Attraction } from '../entity/Entity'
 
 
 export const request = axios.create({
-  baseURL: "http://192.168.31.10:8080",
+  baseURL: "http://192.168.135.202:8080",
   timeout: 3000
 })
 
 export function toUrl(imgName: string) {
 
-  return "http://192.168.31.10:8080" + imgName
+  return "http://192.168.135.202:8080" + imgName
 }
 //请求拦截
 request.interceptors.request.use((config) => {
@@ -75,6 +75,46 @@ export function sendRegisterRequest(data, successCallback, errorCallback) {
   });
 }
 
+// export function sendReservationRequest(data, successCallback, errorCallback) {
+//   request({
+//     method: 'post',
+//     url: "/insertAttractionReservations",
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     data: data
+//   }).then(function (response) {
+//     if (successCallback) {
+//       successCallback(response);
+//     }
+//   }).catch(function (error) {
+//     if (errorCallback) {
+//       errorCallback(error);
+//     }
+//   });
+// }
+
+
+export function sendReservationRequest(data, successCallback, errorCallback) {
+
+  request({
+    method: 'post',
+    url: "/insertAttractionReservation",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  }).then(function (response) {
+    if (successCallback) {
+      successCallback(response);
+    }
+  }).catch(function (error) {
+    if (errorCallback) {
+      errorCallback(error);
+    }
+  });
+}
+
 
 export function Toast(msg) {
   promptAction.showToast({
@@ -85,9 +125,9 @@ export function Toast(msg) {
 }
 
 export function getAllAttraction(successCallback, errorCallback) {
-  axios({
+  request({
     method: 'get',
-    url: 'http://192.168.31.10:8080/allAttraction',
+    url: '/allAttraction',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
@@ -112,10 +152,32 @@ export function getAllAttraction1() {
   })
 }
 
-export function getAllOperation(successCallback, errorCallback) {
-  axios({
+export function getMyAttraction(data, successCallback, errorCallback) {
+  return request({
     method: 'get',
-    url: 'http://192.168.31.10:8080/allOperation',
+    url: '/allAttractionForUser',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    data: data
+  })
+    .then(response => {
+      if (successCallback) {
+        successCallback(response);
+      }
+    })
+    .catch(error => {
+      if (errorCallback) {
+        errorCallback(error);
+      }
+    });
+}
+
+
+export function getAllOperation(successCallback, errorCallback) {
+  request({
+    method: 'get',
+    url: '/allOperation',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
